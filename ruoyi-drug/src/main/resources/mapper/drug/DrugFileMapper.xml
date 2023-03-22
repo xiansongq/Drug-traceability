@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.drug.mapper.DrugFileMapper">
+    
+    <resultMap type="DrugFile" id="DrugFileResult">
+        <result property="fid"    column="fid"    />
+        <result property="fname"    column="fname"    />
+        <result property="fpath"    column="fpath"    />
+        <result property="ftype"    column="ftype"    />
+        <result property="fuserid"    column="fuserid"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectDrugFileVo">
+        select fid, fname, fpath, ftype, fuserid, create_by, create_time, update_by, update_time, remark from drug_file
+    </sql>
+
+    <select id="selectDrugFileList" parameterType="DrugFile" resultMap="DrugFileResult">
+        <include refid="selectDrugFileVo"/>
+        <where>  
+            <if test="fname != null  and fname != ''"> and fname like concat('%', #{fname}, '%')</if>
+            <if test="fpath != null  and fpath != ''"> and fpath = #{fpath}</if>
+            <if test="ftype != null  and ftype != ''"> and ftype = #{ftype}</if>
+            <if test="fuserid != null  and fuserid != ''"> and fuserid = #{fuserid}</if>
+        </where>
+    </select>
+    
+    <select id="selectDrugFileByFid" parameterType="Long" resultMap="DrugFileResult">
+        <include refid="selectDrugFileVo"/>
+        where fid = #{fid}
+    </select>
+        
+    <insert id="insertDrugFile" parameterType="DrugFile" useGeneratedKeys="true" keyProperty="fid">
+        insert into drug_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fname != null">fname,</if>
+            <if test="fpath != null">fpath,</if>
+            <if test="ftype != null">ftype,</if>
+            <if test="fuserid != null">fuserid,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fname != null">#{fname},</if>
+            <if test="fpath != null">#{fpath},</if>
+            <if test="ftype != null">#{ftype},</if>
+            <if test="fuserid != null">#{fuserid},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDrugFile" parameterType="DrugFile">
+        update drug_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fname != null">fname = #{fname},</if>
+            <if test="fpath != null">fpath = #{fpath},</if>
+            <if test="ftype != null">ftype = #{ftype},</if>
+            <if test="fuserid != null">fuserid = #{fuserid},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where fid = #{fid}
+    </update>
+
+    <delete id="deleteDrugFileByFid" parameterType="Long">
+        delete from drug_file where fid = #{fid}
+    </delete>
+
+    <delete id="deleteDrugFileByFids" parameterType="String">
+        delete from drug_file where fid in 
+        <foreach item="fid" collection="array" open="(" separator="," close=")">
+            #{fid}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,21 @@
+fabric:
+  name: 123
+  # wallet文件夹路径(自动创建)
+  walletDirectory: wallet
+  # 网络配置文件路径
+  networkConnectionConfigPath: src/main/resources/org1ProdNetworkConnection.json
+  # 用户证书路径
+  certificatePath: src/main/resources/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+  # 用户私钥路径
+  privateKeyPath: src/main/resources/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
+  tlsCertPath: src/main/resources/crypto-config/prod-network/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+  # 访问的组织名
+  mspId: Org1MSP
+  # 用户名
+  username: user1
+  # 通道名字
+  channelName: mychannel
+  # 链码名字
+  contractName: druginfo
+  cercontract: certificate
+

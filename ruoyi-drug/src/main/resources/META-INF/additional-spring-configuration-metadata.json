@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "fabric.name",
+      "type": "java.lang.String",
+      "description": "Description for fabric.name."
+  }
+] }
